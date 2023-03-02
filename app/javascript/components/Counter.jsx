@@ -1,4 +1,7 @@
 import React, { useState} from 'react'
+// import ReactRouter from ReactRouter
+import {Link} from "react-router-dom"
+
 const Counter = () => {
   const [count, setCount] = useState(0);
   const increase = () => setCount(count+1);
