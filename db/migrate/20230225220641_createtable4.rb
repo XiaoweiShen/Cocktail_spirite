@@ -1,6 +1,5 @@
 class Createtable4 < ActiveRecord::Migration[6.1]
   def change
-    drop_table :drinkingredients
     create_table :drink_ingredients, force: :cascade do |t|
       t.references :drink, index:true, froeign_key:true 
       t.references :ingredient, index:true,foreign_key:true
