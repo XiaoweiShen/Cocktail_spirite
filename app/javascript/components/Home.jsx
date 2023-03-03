@@ -1,21 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navigation from "./Navigation"
 
 export default () => (
-  <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
+  <div>
+    <Navigation />
     <div className="jumbotron jumbotron-fluid bg-transparent">
       <div className="container secondary-color">
-        <h1 className="display-4">Food Recipes</h1>
+        <h1 className="display-4">Cocktail Shaker</h1>
         <p className="lead">
-          A curated list of recipes for the best homemade meal and delicacies.
+          Recipes and more
         </p>
         <hr className="my-4" />
         <Link
-          to="/recipes"
+          to="/Drinks"
           className="btn btn-lg custom-button"
           role="button"
         >
-          View Recipes
+          Start Making Drinks
         </Link>
       </div>
     </div>
