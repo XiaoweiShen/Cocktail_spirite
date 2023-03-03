@@ -1,0 +1,10 @@
+<h1>Drinks</h1>
+
+<ul>
+  <% @drinks.each do |drink| %>
+    <li>
+      <h2><%= drink.name %></h2>
+      <%= image_tag drink.image, class: "drink-image" %>
+    </li>
+  <% end %>
+</ul>

@@ -1,5 +1,3 @@
-# Note: You must restart bin/webpack-dev-server for changes to take effect
-
 default: &default
   source_path: app/javascript
   source_entry_path: packs
@@ -46,6 +44,11 @@ default: &default
     - .gif
     - .jpeg
     - .jpg
+    
+  resolve:
+    alias:
+      '@mui/styled-engine': '@mui/styled-engine-sc'
+      '@mui/styled-engine-sc': '@mui/styled-engine-sc'
 
 development:
   <<: *default
