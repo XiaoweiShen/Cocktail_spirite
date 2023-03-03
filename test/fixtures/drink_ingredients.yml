@@ -2,12 +2,6 @@
 
 one:
   drink: one
-  ingredient_id: 1
-  ingredient_name: MyString
-  measure: MyString
 
 two:
   drink: two
-  ingredient_id: 1
-  ingredient_name: MyString
-  measure: MyString

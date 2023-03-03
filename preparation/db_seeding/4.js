@@ -26,7 +26,7 @@ async function fetchDataForLetter(name) {
         if (data) {
           console.log("start......>",data.idIngredient,data.strIngredient,
           ingredientsIdObj[data.strIngredient]==data.idIngredient);
-          seedData += `{'id': ${data.idIngredient},\n 'name':'${data.strIngredient}'\n 'description': "${doubleQuoteSingle(data.strDescription)}"};\n`
+          seedData += `{'id': ${data.idIngredient},\n 'name':'${data.strIngredient}',\n 'image':'www.thecocktaildb.com/images/ingredients/${data.strIngredient}.png',\n 'image_s':'www.thecocktaildb.com/images/ingredients/${data.strIngredient}-Small.png',\n 'image_m':'www.thecocktaildb.com/images/ingredients/${data.strIngredient}-Medium.png',\n 'description': "${doubleQuoteSingle(data.strDescription)}"};\n`
            
         } else {
           console.error(`No data found for letter "${name}"`);

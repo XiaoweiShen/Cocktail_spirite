@@ -45,16 +45,41 @@ logic:
 3. pick next ingrediant 
 4. go on till you get the result of drink and instruction.  
 
+# Setup Database
 
-# Setup 
-1. rails new cocktail_spirit --database=postgresql
-2. rails db:create
-3. bin/rails s
-- Create Model 
-1. bin/rails g model Glass name:string image:string
-2. bin/rails g model Drink name:string image:string tags:string glass:references instruction:string
-3. rails g model ingredient name:string description:string
-4. bin/rails g model Drink_ingredient drink:references ingredient_id:integer ingredient_name:string measure:string
-5. rails g migration AddForeignKeysToDrink_ingredient ingredient_id:ingeger ingredient_name:string
+1. make sure copy the directory /db/seed_assets
+2. make sure schema.rb & seeds.rb are locate at /db
+3. make sure /config/database.yml is replaced by the correct one from repository
+4. in project directory , type command:
+    > rails db:reset 
+5. schema and data will import in your database, can be verify by psql
+    > psql
+    > \c cocktail_spirit_development
+    > \d  #should see 4 tables
+       cocktail_spirit_development=# select count(*) from drinks;
+        count
+        -------
+        425
 
+       cocktail_spirit_development=# select count(*) from drink_ingredients;
+        count
+       -------
+         1672
+       (1 row)
+       
+       cocktail_spirit_development=# select count(*) from ingredients
+       cocktail_spirit_development-# ;
+        count
+       -------
+          292
+       (1 row)
+       
+       cocktail_spirit_development=# select count(*) from glasses;
+        count
+       -------
+           32
+       (1 row)
+       
+
+    
 

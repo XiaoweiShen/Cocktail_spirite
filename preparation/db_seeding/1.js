@@ -1,4 +1,37 @@
-const {ingredients_array,letters, glass_id,ingredientsIdObj} = require("./objects"); 
+const {ingredients_array,letters, ingredientsIdObj} = require("./objects");
+
+const glass_id= {'highball glass':1,
+'cocktail glass':2,
+'old-fashioned glass':3,
+'whiskey glass':4,
+'collins glass':5,
+'pousse cafe glass':6,
+'champagne flute':7,
+'whiskey sour glass':8,
+'cordial glass':9,
+'brandy snifter':10,
+'white wine glass':11,
+'nick and nora glass':12,
+'hurricane glass':13,
+'coffee mug':14,
+'shot glass':15,
+'jar':16,
+'irish coffee cup':17,
+'punch bowl':18,
+'pitcher':19,
+'pint glass':20,
+'copper mug':21,
+'wine glass':22,
+'beer mug':23,
+'margarita/coupette glass':24,
+'beer pilsner':25,
+'beer glass':26,
+'parfait glass':27,
+'mason jar':28,
+'margarita glass':29,
+'martini glass':30,
+'balloon glass':31,
+'coupe glass':32};
 
 const fs = require("fs");
 const request = require("request");
@@ -47,7 +80,7 @@ async function fetchDataForLetter(letter) {
             rand = Math.floor(Math.random() * tags.length)
             rand2 = Math.floor(Math.random()* tags2.length)
             tag = drink.strTags||(tags[rand]+','+tags2[rand2])
-            seedData += `{ 'id':'${drink.idDrink}',\n 'name': "${drink.strDrink.replaceAll(`"`,`'`)}",\n 'image': '${drink.strDrinkThumb}',\n 'tags': '${tag}',\n 'glass_id':'${glass_id[drink.strGlass]}',\n instruction': "${drink.strInstructions.replaceAll(`"`,`'`)}"},\n`;
+            seedData += `{ 'id':'${drink.idDrink}',\n 'name': "${drink.strDrink.replaceAll(`"`,`'`)}",\n 'image': '${drink.strDrinkThumb}',\n 'tags': '${tag}',\n 'glass_id':'${glass_id[drink.strGlass.toLowerCase()]}',\n instruction': "${drink.strInstructions.replaceAll(`"`,`'`)}"},\n`;
           });
         } else {
           console.error(`No data found for letter "${letter}"`);
@@ -58,6 +91,7 @@ async function fetchDataForLetter(letter) {
         reject();
       }
     });
+  
   });
 }
 
