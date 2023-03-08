@@ -55,6 +55,5 @@ ActiveRecord::Schema.define(version: 2023_02_25_220641) do
   end
 
   add_foreign_key "drink_ingredients", "ingredients"
-  add_foreign_key "drink_ingredients", "drinks"
   add_foreign_key "drinks", "glasses"
 end

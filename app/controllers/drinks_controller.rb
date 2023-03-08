@@ -8,8 +8,6 @@ class DrinksController < ApplicationController
     end
   end
 
-
-
   def show
    @drink = Drink.find(params[:id])
    respond_to do |format|
