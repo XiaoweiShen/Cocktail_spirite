@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-def open_asset(file_name)
-  File.open(Rails.root.join('db', 'seed_assets', file_name))
-end
+# def open_asset(file_name)
+#   File.open(Rails.root.join('db', 'seed_assets', file_name))
+# end
 
 Ingredient.create!({id: 2,
   name:'Gin',
@@ -2388,100 +2388,100 @@ Ingredient.create!({id: 2,
  
 Glass.create!({id: 1,
   name:"Highball glass",
-  image: open_asset('Highball glass.png')})
+  image: "/assets/Highball glass.png"})
 Glass.create!({id: 2,
   name:'Cocktail glass',
-  image: open_asset('Cocktail glass.png')})
+  image: "/assets/Cocktail glass.png"})
 Glass.create!({id: 3,
   name:'Old-fashioned glass',
-  image: open_asset('Old-fashioned glass.png')})
+  image: "/assets/Old-fashioned glass.png"})
 Glass.create!({id: 4,
   name:'Whiskey glass',
-  image: open_asset('Whiskey glass.png')})
+  image: "/assets/Whiskey glass.png"})
 Glass.create!({id: 5,
   name:'Collins glass',
-  image: open_asset('Collins glass.png')})
+  image: "/assets/Collins glass.png"})
 Glass.create!({id: 6,
   name:'Pousse cafe glass',
-  image: open_asset('Pousse cafe glass.png')})
+  image: "/assets/Pousse cafe glass.png"})
 Glass.create!({id: 7,
  name:'Champagne flute',
-  image: open_asset('Champagne flute.png')})
+  image: "/assets/Champagne flute.png"})
 Glass.create!({id: 8,
   name:'Whiskey sour glass',
-  image: open_asset('Whiskey sour glass.png')})
+  image: "/assets/Whiskey sour glass.png"})
 Glass.create!({id: 9,
   name:'Cordial glass',
-  image: open_asset('Cordial glass.png')})
+  image: "/assets/Cordial glass.png"})
 Glass.create!({id: 10,
   name:'Brandy snifter',
- image: open_asset('Brandy snifter.png')})
+ image: "/assets/Brandy snifter.png"})
 Glass.create!({id: 11,
  name:'White wine glass',
- image: open_asset('White wine glass.png')})
+ image: "/assets/White wine glass.png"})
 Glass.create!({id: 12,
  name:'Nick and Nora glass',
- image: open_asset('Nick and Nora glass.png')})
+ image: "/assets/Nick and Nora glass.png"})
 Glass.create!({id: 13,
  name:'Hurricane glass',
- image: open_asset('Hurricane glass.png')})
+ image: "/assets/Hurricane glass.png"})
 Glass.create!({id: 14,
  name:'Coffee mug',
- image: open_asset('Coffee mug.png')})
+ image: "/assets/Coffee mug.png"})
 Glass.create!({id: 15,
  name:'Shot glass',
- image: open_asset('Shot glass.png')})
+ image: "/assets/Shot glass.png"})
 Glass.create!({id: 16,
  name:'Jar',
- image: open_asset('Jar.png')})
+ image: "/assets/Jar.png"})
 Glass.create!({id: 17,
  name:'Irish coffee cup',
- image: open_asset('Irish coffee cup.png')})
+ image: "/assets/Irish coffee cup.png"})
 Glass.create!({id: 18,
  name:'Punch bowl',
- image: open_asset('Punch bowl.png')})
+ image: "/assets/Punch bowl.png"})
 Glass.create!({id: 19,
  name:'Pitcher',
- image: open_asset('Pitcher.png')})
+ image: "/assets/Pitcher.png"})
 Glass.create!({id: 20,
  name:'Pint glass',
- image: open_asset('Pint glass.png')})
+ image: "/assets/Pint glass.png"})
 Glass.create!({id: 21,
  name:'Copper mug',
- image: open_asset('Copper mug.png')})
+ image: "/assets/Copper mug.png"})
 Glass.create!({id: 22,
  name:'Wine glass',
- image: open_asset('Wine glass.png')})
+ image: "/assets/Wine glass.png"})
 Glass.create!({id: 23,
  name:'Beer mug',
- image: open_asset('Beer mug.png')})
+ image: "/assets/Beer mug.png"})
 Glass.create!({id: 24,
  name:'Margarita or Coupette glass',
- image: open_asset('Margarita glass.png')})
+ image: "/assets/Margarita glass.png"})
 Glass.create!({id: 25,
  name:'Beer pilsner',
- image: open_asset('Beer pilsner.png')})
+ image: "/assets/Beer pilsner.png"})
 Glass.create!({id: 26,
  name:'Beer glass',
- image: open_asset('Beer glass.png')})
+ image: "/assets/Beer glass.png"})
 Glass.create!({id: 27,
  name:'Parfait glass',
- image: open_asset('Parfait glass.png')})
+ image: "/assets/Parfait glass.png"})
 Glass.create!({id: 28,
  name:'Mason jar',
- image: open_asset('Mason jar.png')})
+ image: "/assets/Mason jar.png"})
 Glass.create!({id: 29,
  name:'Margarita glass',
- image: open_asset('Margarita glass.png')})
+ image: "/assets/Margarita glass.png"})
 Glass.create!({id: 30,
  name:'Martini glass',
- image: open_asset('Martini glass.png')})
+ image: "/assets/Martini glass.png"})
 Glass.create!({id: 31,
  name:'Balloon glass',
- image: open_asset('Balloon glass.png')})
+ image: "/assets/Balloon glass.png"})
 Glass.create!({id: 32,
  name:'Coupe glass',
- image: open_asset('Coupe glass.png')})
+ image: "/assets/Coupe glass.png"})
 Drink.create!({id:'17222',
  name: "A1",
 image: 'https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg',

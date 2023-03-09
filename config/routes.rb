@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+ 
+  resources :drinks,only: [:index, :show, :edit, :update]
+  resources :ingredients,only: [:index, :show]
+  resources :glasses, only: [:index, :show]
+  resources :drink_ingredients, only: [:show]
   root 'homepage#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  match '*path' => 'homepage#index', via: :all
 end
