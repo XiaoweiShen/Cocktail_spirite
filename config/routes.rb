@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   resources :glasses, only: [:index, :show]
   resources :drink_ingredients, only: [:show]
   root 'homepage#index'
+  get '/api/drinks/:id', to: 'drinks#show'
+  get '/api/drinks', to: 'drinks#index'
   match '*path' => 'homepage#index', via: :all
 end

@@ -14,7 +14,7 @@ export default () => {
 		return (
 			<div key={drink.id} >
 				<h1>{drink.name}</h1>
-				<img src={drink.image}></img>
+				<img className="drink-list-img" src={drink.image}></img>
 			</div>
 		)
 	});
