@@ -17,7 +17,7 @@ import DrinkList from "../components/DrinkList";
 import DrinkMixer from "../components/DrinkMixer";
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(
+  createRoot(
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
