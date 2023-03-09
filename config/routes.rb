@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :drink_ingredients, only: [:index, :show], defaults: { format: :json }
+  resources :ingredients, only: [:index, :show], defaults: { format: :json }
   root 'homepage#index'
   get '/api/drinks/:id', to: 'drinks#show'
   get '/api/drinks', to: 'drinks#index'
@@ -6,7 +8,5 @@ Rails.application.routes.draw do
   namespace :api do
     resources :drinks, only: [:show]
   end
-  # get '/Drinks', to: 'homepage#index'
-  # get '/DrinkMixer', to: 'homepage#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -3,39 +3,42 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default () => {
-    const [drink, setDrink] = useState(null);
-    const [ingredients, setIngredients] = useState(null);
-    const { id } = useParams();
+  const [drink, setDrink] = useState(null);
+  const [ingredients, setIngredients] = useState([]);
+  const { id } = useParams();
 
-    useEffect(() => {
-        axios.get(`http://localhost:3000/api/v1/drinks/${id}`)
-            .then(response => {
-                setDrink(response.data);
-                setIngredients(response.data.ingredients);
-            })
-            .catch(error => console.log(error));
-    }, [id]);
+  useEffect(() => {
+    axios.get(`/api/drinks/${id}`).then((res) => {
+      setDrink(res.data);
+    });
+    axios.get(`/drink_ingredients?drink_id=${id}`).then((res) => {
+      setIngredients(res.data.filter((i) => i.drink_id === Number(id)));
+    });
+  }, [id]);
 
-    return (
-        <div>
-            {drink && (
-                <div>
-                    <h1>{drink.name}</h1>
-                    <img src={drink.image} alt={drink.name} />
-                    <p>{drink.instruction}</p>
-                    <p>Tags: {drink.tags}</p>
-                    <h3>Ingredients:</h3>
-                    <ul>
-                        {ingredients.map(ingredient => (
-                            <li key={ingredient.id}>
-                                {ingredient.name} - 
-                                <img src={ingredient.image_s} alt={ingredient.name} />
-                                {ingredient.measure}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </div>
-    );
+  if (!drink) {
+    return <div>Drink does not exist</div>;
+  }
+console.log('ingredients',ingredients)
+  let url = (`http://${ingredient.image}`)
+  console.log("url",url)
+
+  return (
+    <div>
+      <h1>{drink.name}</h1>
+      <img src={drink.image} />
+      <p>Tags: {drink.tags}</p>
+      <h3>Ingredients List:</h3>
+      <ul>
+        {ingredients.map((ingredient) => (
+          <li key={ingredient.id}>
+
+            <img src={url}  alt={ingredient.name} />
+            {ingredient.ingredient_name} - {ingredient.measure}
+          </li>
+        ))}
+      </ul>
+      <p>{drink.instruction}</p>
+    </div>
+  );
 };
