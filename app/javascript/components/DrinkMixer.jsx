@@ -1,30 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios"
 
-export default () => (
-    <div>
-        <div className="mixer-1">
+// export default () => (
+//     <div>
+//         <div className="mixer-1">
 
-            <div className="mixer-2">
-                <h1>TEST</h1>
-            </div>
+//             <div className="mixer-2">
+//                 <h1>TEST</h1>
+//             </div>
 
-            <div className="mixer-3">
-                <div>
-                    <h1>TEST</h1>
-                </div>
-                <div>
-                    <h1>TEST</h1>
-                </div>
+//             <div className="mixer-3">
+//                 <div>
+//                     <h1>TEST</h1>
+//                 </div>
+//                 <div>
+//                     <h1>TEST</h1>
+//                 </div>
 
-                <div>
-                    <h1>TEST</h1>
-                </div>
-            </div>
+//                 <div>
+//                     <h1>TEST</h1>
+//                 </div>
+//             </div>
 
-        </div>
-    </div>
-);
+//         </div>
+//     </div>
+// );
+
+export default () => {
+	const [ingredients, setIngredients] = useState([]);
+	useEffect(() => {
+		axios.get("/ingredients.json").then((res) => {
+			setIngredients(res.data)
+		});
+	}, []);
+
+	const ingredientsList = ingredients.map(ingredient => {
+		return (
+			<div key={ingredient.id} >
+				<h1>{ingredient.name}</h1>
+				<img className="drink-list-img" src={`http://${ingredient.image}`}></img>
+			</div>
+		)
+	});
+
+	return (
+		<div>
+			<h1>INGREDIENTS</h1>
+			{ingredientsList}
+		</div>
+	);
+};
 
 // send params as a object
 // id: [1, 2]
