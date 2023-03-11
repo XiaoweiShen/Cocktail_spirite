@@ -8,7 +8,8 @@ const App = () => {
   const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/drinks").then((res) => {
+    // axios.get("/api/drinks").then((res) => {
+    axios.get("/drinks.json").then((res) => {
       const filteredDrinks = res.data.filter((drink) => drink.tags.includes("Winter"));
       setDrinks(filteredDrinks)
     });

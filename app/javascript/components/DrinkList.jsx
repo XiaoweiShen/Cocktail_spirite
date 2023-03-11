@@ -5,7 +5,8 @@ import axios from "axios"
 export default () => {
 	const [drinks, setDrinks] = useState([]);
 	useEffect(() => {
-		axios.get("/api/drinks").then((res) => {
+		// axios.get("/api/drinks").then((res) => {
+		axios.get("/drinks.json").then((res) => {
 			setDrinks(res.data)
 		});
 	}, []);
