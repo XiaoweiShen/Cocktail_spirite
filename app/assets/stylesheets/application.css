@@ -124,3 +124,9 @@
 .mixer-3 {
 	background-color: beige;
 }
+
+/* Drink List */
+.drink-list-img {
+	height: 20%;
+	width: 20%;
+}

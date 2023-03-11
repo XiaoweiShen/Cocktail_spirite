@@ -82,7 +82,7 @@ logic:
 
 # Back end interface defination
 - /drinks.json -- json data of drinks (id, name, tags, and image)
-- /drinks/id.json -- json dara of specific drink (everything)
+- /drinks/id.json -- json data of specific drink (everything)
 - /ingredients.json -- json data of ingredients (id, name , image, image_s, image_m, description)
 - /drink_ingredients/id -- json data : Grab all cocktail with the ingredient_id,and all ingredient of them.
 
