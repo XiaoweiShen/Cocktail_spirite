@@ -13,12 +13,12 @@ export default () => {
   }, []);
 
   //This will give me the list of drinks with just their id at /drinks.json
-  const [drinks, setDrinks] = useState([]);
-  useEffect(() => {
-    axios.get("/drinks.json").then((res) => {
-      setDrinks(res.data)
-    });
-  }, []);
+  // const [drinks, setDrinks] = useState([]);
+  // useEffect(() => {
+  //   axios.get("/drinks.json").then((res) => {
+  //     setDrinks(res.data)
+  //   });
+  // }, []);
 
 
   //When I select an ingredient...its ID stored here
@@ -227,3 +227,98 @@ console.log("SELECTED INGREDIENT ID", selectedIngredientId)
 // 1 axios request => path in backend db query that finds all drinks that match the ingredient
 // another db query to match drink ids
 //axios request to get all the drinks that match all the id in the drink ingredients array
+
+// // import React, { useState, useEffect,useReducer} from "react";
+// // import { Link } from "react-router-dom";
+// // import axios from "axios";
+
+// export default () => {
+//   //This will give me the list of ingredients with just their id at /ingredients.json
+//   // const [staticdata,setStaticdata]=useState({
+//   //   ingredients:[],
+//   //   drinks:[],
+//   //   glasses:[]
+//   // });
+//   // const [selectedIngredientId, setSelectedIngredientId] = useState([]);
+//   // const firstIngredientsList = [1,2,66,71,3,128];
+
+//   // useEffect(() => {
+//   //   Promise.all([
+//   //     axios.get("/ingredients.json"),
+//   //     //axios.get("/drinks.json"),
+//   //     axios.get("/glasses.json"),
+//   //   ]).then((all) => {
+//   //     setStaticdata({
+//   //       ingredients: all[0].data,
+//   //       //drinks: all[1].data,
+//   //       glasses: all[1].data,
+//   //     })
+//   //   });
+//   // }, []);
+
+
+// // const findIngredient = (id)=>{
+// //   return setStaticdata.ingredients.filter(item=>item.id==id)
+// // };
+// // const startmix=item=>{};
+
+// // firstIngredientsList.map(item=>{
+// //   return(
+// //     <li selected='false' onClick={()=>startmix(item)}>
+// //       <img src="www.thecocktaildb.com/images/ingredients/Baileys Irish Cream-Small.png"></img>
+// //     </li>
+    
+// //   )
+// // })
+
+
+
+
+
+
+//   // useEffect(() => {
+//   //   if (selectedIngredientId) {
+//   //     setDrinkIngredients([])
+//   //     selectedIngredientId.map((ingredient_id) => {
+//   //       axios.get(`/drink_ingredients/${ingredient_id}.json`).then(res => {
+//   //         setDrinkIngredients((prev) => [...prev, res.data]);
+//   //         console.log('INGREDIENTS AND DRINKS DATA', res.data)
+//   //       });
+//   //     })
+//   //   }
+//   // }, [selectedIngredientId]);
+
+//   // function handleIngredientSelect(id) {
+//   //   {
+//   //     setSelectedIngredientId((prev) => {
+//   //       let index = selectedIngredientId.indexOf(id)
+//   //       if (index === -1) {
+//   //         return [...prev, id]
+//   //       } else {
+//   //         prev.splice(index, 1)
+//   //         return prev
+//   //       }
+//   //     });
+      
+//   //   }
+//   // }
+
+
+//   // const ingredientsList = ingredientFilter.map(ingredient => {
+//   //   return (
+//   //     <button key={ingredient.id} onClick={() => handleIngredientSelect(ingredient.id)}>
+//   //       {ingredient.name}
+//   //     </button>
+//   //   )
+//   // });
+
+//   return (
+     
+//     <div>
+  
+//       <h2>Start Make Your Favorite...</h2>
+     
+
+//       </div>
+
+//   );}

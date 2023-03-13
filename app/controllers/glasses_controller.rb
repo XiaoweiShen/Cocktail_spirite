@@ -1,6 +1,10 @@
 class GlassesController < ApplicationController
   def index
     @glasses = Glass.all
+    respond_to do |format|
+      format.html # Render the HTML template
+      format.json { render json: @glasses } # Render the JSON template
+  end
   end
 
   def show
