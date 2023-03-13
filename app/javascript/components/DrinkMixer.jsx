@@ -42,22 +42,22 @@ export default () => {
 
   //Click ingredient and sets the id ^^^^^
   function handleIngredientSelect(id) {
-      let temparray= [...selectedIngredientId,id];
-      const filter_result = filter2(drinkIngredients,temparray);
-      console.log('-----------',filter_result);
-    // setSelectedIngredientId((prev) => {
-    //   const index = prev.indexOf(id);
-    //   if (index === -1) {
-    //     // adds the ingredient ID to the selected list if not already there
-    //     console.log("ARRAY", [...prev, id])
-    //     return [...prev, id];
-    //   } else {
-    //     // removes the ingredient ID from the selected list if already there
-    //     prev.splice(index, 1);
-    //     console.log("ARRAY 2", [...prev])
-    //     return [...prev];
-    //   }
-    // });
+      // let temparray= [...selectedIngredientId,id];
+      // const filter_result = filter2(drinkIngredients,temparray);
+      // console.log('-----------',filter_result);
+    setSelectedIngredientId((prev) => {
+      const index = prev.indexOf(id);
+      if (index === -1) {
+        // adds the ingredient ID to the selected list if not already there
+        console.log("ARRAY", [...prev, id])
+        return [...prev, id];
+      } else {
+        // removes the ingredient ID from the selected list if already there
+        prev.splice(index, 1);
+        console.log("ARRAY 2", [...prev])
+        return [...prev];
+      }
+    });
   }
   console.log("SELECTED INGREDIENT ID", selectedIngredientId)
   console.log("DRINK INGREDIENTS", drinkIngredients)

@@ -20,7 +20,6 @@ export default () => {
     return <div>Drink does not exist</div>;
   }
 
-
   return (
     <div>
       <h1>{drink.name}</h1>

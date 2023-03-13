@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, List, Col, Row } from 'antd';
+import { Card, Col, Row } from 'antd';
 import axios from "axios"
 import { useState, useEffect } from "react";
 
