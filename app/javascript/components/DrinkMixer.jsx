@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useSyncExternalStore } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { filter2 } from "../helper/test";
 
 
 export default () => {
@@ -20,19 +21,15 @@ export default () => {
     });
   }, []);
 
-
   //When I select an ingredient...its ID stored here
   const [selectedIngredientId, setSelectedIngredientId] = useState([]);
-  //filter through drink_ingredients
 
   //a list of drinks with the ingredient selected and a list of all the ingredients from those drinks will show at drink_ingredients/${id}.json
   const [drinkIngredients, setDrinkIngredients] = useState([]);
-  const [ingredientHistory, setIngredientHistory] = useState([])
-
 
   useEffect(() => {
     if (selectedIngredientId) {
-      setDrinkIngredients([])
+      setDrinkIngredients([]) //resets data
       selectedIngredientId.map((ingredient_id) => {
         axios.get(`/drink_ingredients/${ingredient_id}.json`).then(res => {
           setDrinkIngredients((prev) => [...prev, res.data]);
@@ -41,6 +38,114 @@ export default () => {
       })
     }
   }, [selectedIngredientId]);
+
+
+  //Click ingredient and sets the id ^^^^^
+  function handleIngredientSelect(id) {
+      let temparray= [...selectedIngredientId,id];
+      const filter_result = filter2(drinkIngredients,temparray);
+      console.log('-----------',filter_result);
+    // setSelectedIngredientId((prev) => {
+    //   const index = prev.indexOf(id);
+    //   if (index === -1) {
+    //     // adds the ingredient ID to the selected list if not already there
+    //     console.log("ARRAY", [...prev, id])
+    //     return [...prev, id];
+    //   } else {
+    //     // removes the ingredient ID from the selected list if already there
+    //     prev.splice(index, 1);
+    //     console.log("ARRAY 2", [...prev])
+    //     return [...prev];
+    //   }
+    // });
+  }
+  console.log("SELECTED INGREDIENT ID", selectedIngredientId)
+  console.log("DRINK INGREDIENTS", drinkIngredients)
+
+  
+  // for (const drinkIngredient of drinkIngredients) {
+  //   console.log("FILTER", filter2(drinkIngredient, [43]))
+  // }
+  //filter return drinks that have the selected ingredients
+  //compares the id of the drink.
+  const filteredUserSelection = drinks.filter(drink => {
+    console.log("DRINK", drink)
+    return drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id))
+  });
+
+  // const filteredUserSelection = drinkIngredients.filter(drink => { 
+  //   console.log("DRINK", drink)
+  //   const testDrink = drink.drink_ingredient.ingredient_id_list.every((v) => selectedIngredientId.includes(v))
+  //   console.log("TEST DRINK", testDrink)
+  //   return true
+  //   // return drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id))
+  // });
+
+  // if (selectedIngredientId.length > 0) {
+
+  // }
+  console.log('FILTER USER SELECTION', filteredUserSelection)
+
+
+  //if a selection is not made yet. show all the ingredients. otherwise filter the ingredients and only return the ingredient. drinks that are created
+  //if gin is selected previously and every other ingredients only shows related ingredients related to gin (drink)
+  const ingredientFilter = selectedIngredientId.length === 0 ? ingredients : ingredients.filter(
+    (ingredient) => drinkIngredients.find((i) => i.available_ingredient_list.includes(ingredient.id))
+  );
+  console.log('INGREDIENT FILTER', ingredientFilter)
+
+  // const ingredientFilterTwo = selectedIngredientId.length === 0 ? ingredients : drinkIngredients.filter(
+  //   (ingredient) => {
+  //     console.log("INGREDIENT",ingredient)
+  //     return true
+  //   }
+  // )
+
+  //lists out all the ingredients as clickable buttons
+  const ingredientsList = ingredientFilter.map(ingredient => {
+    return (
+      <button key={ingredient.id} onClick={() => handleIngredientSelect(ingredient.id)}>
+        {ingredient.name}
+      </button>
+    )
+  });
+
+  //lists out the selected ingredients as clickable buttons
+  const selectedIngredientsList = selectedIngredientId.map((ingredientId) => {
+    const ingredient = ingredients.find((i) => i.id === ingredientId);
+    return (
+      <button key={ingredientId} onClick={() => handleIngredientSelect(ingredientId)}>
+        {ingredient.name}
+      </button>
+    );
+  });
+
+  //lists out drinks available from the selected ingredients
+  const availableDrinksList = filteredUserSelection.map((drink) => {
+    return (
+      <li key={drink.id}>
+        {drink.name}
+      </li>
+    );
+  });
+
+  return (
+    <div>
+
+      <h2>Ingredients</h2>
+      {ingredientsList}
+
+      <h2>Selected Ingredients</h2>
+      {selectedIngredientsList}
+
+      <h2>Available Drinks</h2>
+      <ul>
+        {availableDrinksList}
+      </ul>
+
+    </div>
+  );
+}
 
 
   //import helper function for filter.
@@ -74,98 +179,7 @@ export default () => {
   //trace available ingredient list.
   //available ingredient list
 
-  //Click ingredient and sets the id ^^^^^
-  function handleIngredientSelect(id) {
-    {
-      setSelectedIngredientId((prev) => {
-        let index = selectedIngredientId.indexOf(id)
-        if (index === -1) {
-          return [...prev, id]
-        } else {
-          prev.splice(index, 1)
-          return prev
-        }
-      });
-      
-    }
-  }
-console.log("SELECTED INGREDIENT ID", selectedIngredientId)
 
-
-  //filter return drinks that have the selected ingredients
-  // const filteredUserSelection = drinks.filter(x => x.ingredients.find((i) => selectedIngredientId.includes(i)));
-  const filteredUserSelection = drinks.filter(drink => drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id)));
-  //compares the id of the drink.
-  console.log('FILTER USER SELECTION', filteredUserSelection)
-
-  const ingredientFilter = selectedIngredientId.length === 0 ? ingredients : ingredients.filter((ingredient) => drinkIngredients.find((i) => i.available_ingredient_list.includes(ingredient.id)));
-  console.log('INGREDIENT FILTER', ingredientFilter)
-  //if a selection is not made yet. show all the ingredients. otherwise filter the ingredients. and only return the ingredient. drinks that are created
-  //if gin is selected previously and every other ingredients only shows related ingredients related to gin (drink)
-
-  //lists out all the ingredients as clickable buttons
-  const ingredientsList = ingredientFilter.map(ingredient => {
-    return (
-      <button key={ingredient.id} onClick={() => handleIngredientSelect(ingredient.id)}>
-        {ingredient.name}
-      </button>
-    )
-  });
-
-  // const drinkIngredientList = drinkIngredients.drink_ingredient.map(drinkIngredient => {
-  //   return (
-  //     <li>
-  //       {drinkIngredients.drink_ingredient.id}
-  //     </li>
-  //   )
-  // })
-
-  return (
-    <div>
-      <h2>Ingredients</h2>
-      {ingredientsList}
-
-      {/* <h2>Available Drinks</h2>
-      <ul>
-        {array_of_drinks}
-      </ul>
-      <h2>Available Ingredients</h2>
-      <ul>
-        {array_of_selections}
-      </ul>
-      <h2>What you already selected</h2>
-      <ul>
-        {selectedIngredientId}
-      </ul> */}
-    </div>
-  );
-
-}
-
-// export default () => (
-//     <div>
-//         <div className="mixer-1">
-
-//             <div className="mixer-2">
-//                 <h1>TEST</h1>
-//             </div>
-
-//             <div className="mixer-3">
-//                 <div>
-//                     <h1>TEST</h1>
-//                 </div>
-//                 <div>
-//                     <h1>TEST</h1>
-//                 </div>
-
-//                 <div>
-//                     <h1>TEST</h1>
-//                 </div>
-//             </div>
-
-//         </div>
-//     </div>
-// );
 
 // export default () => {
 // 	const [ingredients, setIngredients] = useState([]);
@@ -227,3 +241,5 @@ console.log("SELECTED INGREDIENT ID", selectedIngredientId)
 // 1 axios request => path in backend db query that finds all drinks that match the ingredient
 // another db query to match drink ids
 //axios request to get all the drinks that match all the id in the drink ingredients array
+
+
