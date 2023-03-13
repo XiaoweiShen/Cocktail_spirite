@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { filter2 } from "../helper/test";
 
 
 export default () => {
@@ -28,7 +29,7 @@ export default () => {
 
   useEffect(() => {
     if (selectedIngredientId) {
-      setDrinkIngredients([])
+      setDrinkIngredients([]) //resets data
       selectedIngredientId.map((ingredient_id) => {
         axios.get(`/drink_ingredients/${ingredient_id}.json`).then(res => {
           setDrinkIngredients((prev) => [...prev, res.data]);
@@ -41,27 +42,33 @@ export default () => {
 
   //Click ingredient and sets the id ^^^^^
   function handleIngredientSelect(id) {
-    setSelectedIngredientId((prev) => {
-      const index = prev.indexOf(id);
-      if (index === -1) {
-        // adds the ingredient ID to the selected list if not already there
-        console.log("ARRAY", [...prev, id])
-        return [...prev, id];
-      } else {
-        // removes the ingredient ID from the selected list if already there
-        prev.splice(index, 1);
-        console.log("ARRAY 2", [...prev])
-        return [...prev];
-      }
-    });
+      let temparray= [...selectedIngredientId,id];
+      const filter_result = filter2(drinkIngredients,temparray);
+      console.log('-----------',filter_result);
+    // setSelectedIngredientId((prev) => {
+    //   const index = prev.indexOf(id);
+    //   if (index === -1) {
+    //     // adds the ingredient ID to the selected list if not already there
+    //     console.log("ARRAY", [...prev, id])
+    //     return [...prev, id];
+    //   } else {
+    //     // removes the ingredient ID from the selected list if already there
+    //     prev.splice(index, 1);
+    //     console.log("ARRAY 2", [...prev])
+    //     return [...prev];
+    //   }
+    // });
   }
   console.log("SELECTED INGREDIENT ID", selectedIngredientId)
   console.log("DRINK INGREDIENTS", drinkIngredients)
 
-
+  
+  // for (const drinkIngredient of drinkIngredients) {
+  //   console.log("FILTER", filter2(drinkIngredient, [43]))
+  // }
   //filter return drinks that have the selected ingredients
   //compares the id of the drink.
-  const filteredUserSelection = drinks.filter(drink => { 
+  const filteredUserSelection = drinks.filter(drink => {
     console.log("DRINK", drink)
     return drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id))
   });
