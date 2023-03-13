@@ -19,9 +19,13 @@ export default () => {
   if (!drink) {
     return <div>Drink does not exist</div>;
   }
+<<<<<<< HEAD
 console.log('ingredients',ingredients)
   let url = (`http://${ingredient.image}`)
   console.log("url",url)
+=======
+
+>>>>>>> origin/master
 
   return (
     <div>
@@ -31,9 +35,16 @@ console.log('ingredients',ingredients)
       <h3>Ingredients List:</h3>
       <ul>
         {ingredients.map((ingredient) => (
+<<<<<<< HEAD
           <li key={ingredient.id}>
 
             <img src={url}  alt={ingredient.name} />
+=======
+            
+          <li key={ingredient.id}>
+
+          <img src={`/ingredients/${ingredient.image}`}  alt={ingredient.name} />
+>>>>>>> origin/master
             {ingredient.ingredient_name} - {ingredient.measure}
           </li>
         ))}
@@ -41,4 +52,8 @@ console.log('ingredients',ingredients)
       <p>{drink.instruction}</p>
     </div>
   );
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> origin/master

@@ -79,7 +79,30 @@ logic:
        -------
            32
        (1 row)
-       
 
+# Back end interface defination
+- /drinks.json -- json data of drinks (id, name, tags, and image)
+- /drinks/id.json -- json data of specific drink (everything)
+- /ingredients.json -- json data of ingredients (id, name , image, image_s, image_m, description)
+- /drink_ingredients/id -- json data : Grab all cocktail with the ingredient_id,and all ingredient of them.
+
+｛ 
+ "drink_ingredient": [id,[id of ingredients]],
+ "available_ingredient_list": [id of choice...]
+ ｝ 
+
+- /glasses  --all glasses
+- /glasses/id  --json data : Grab all cocktail with the glass_id,and all ingredient of them.
+
+｛ 
+ "drink_ingredient": [id,[id of ingredients]],
+ "available_ingredient_list": [id of choice...]
+ ｝ 
     
+
+- filter fucntion , use to select next ingredient from above json data and generate the new object , you can use the fuction till find out the final choice. 
+｛ 
+ "drink_ingredient": [id,[id of ingredients]],
+ "available_ingredient_list": [id of choice...]
+ ｝ 
 
