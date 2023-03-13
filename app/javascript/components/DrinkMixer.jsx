@@ -40,17 +40,18 @@ export default () => {
 
 
   //Click ingredient and sets the id ^^^^^
-
   function handleIngredientSelect(id) {
     setSelectedIngredientId((prev) => {
       const index = prev.indexOf(id);
       if (index === -1) {
         // adds the ingredient ID to the selected list if not already there
+        console.log("ARRAY", [...prev, id])
         return [...prev, id];
       } else {
         // removes the ingredient ID from the selected list if already there
         prev.splice(index, 1);
-        return [...prev]; // returns a new array and re-render
+        console.log("ARRAY 2", [...prev])
+        return [...prev];
       }
     });
   }
@@ -59,19 +60,39 @@ export default () => {
 
 
   //filter return drinks that have the selected ingredients
-  // const filteredUserSelection = drinks.filter(x => x.ingredients.find((i) => selectedIngredientId.includes(i)));
   //compares the id of the drink.
-  const filteredUserSelection = drinks.filter(drink => drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id)));
+  const filteredUserSelection = drinks.filter(drink => { 
+    console.log("DRINK", drink)
+    return drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id))
+  });
+
+  // const filteredUserSelection = drinkIngredients.filter(drink => { 
+  //   console.log("DRINK", drink)
+  //   const testDrink = drink.drink_ingredient.ingredient_id_list.every((v) => selectedIngredientId.includes(v))
+  //   console.log("TEST DRINK", testDrink)
+  //   return true
+  //   // return drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id))
+  // });
+
+  // if (selectedIngredientId.length > 0) {
+
+  // }
   console.log('FILTER USER SELECTION', filteredUserSelection)
 
 
-  //if a selection is not made yet. show all the ingredients. otherwise filter the ingredients. and only return the ingredient. drinks that are created
+  //if a selection is not made yet. show all the ingredients. otherwise filter the ingredients and only return the ingredient. drinks that are created
   //if gin is selected previously and every other ingredients only shows related ingredients related to gin (drink)
-  const ingredientFilter = selectedIngredientId.length === 0 ? ingredients : ingredients.filter((ingredient) => drinkIngredients.find((i) => i.available_ingredient_list.includes(ingredient.id)));
+  const ingredientFilter = selectedIngredientId.length === 0 ? ingredients : ingredients.filter(
+    (ingredient) => drinkIngredients.find((i) => i.available_ingredient_list.includes(ingredient.id))
+  );
   console.log('INGREDIENT FILTER', ingredientFilter)
 
-
-
+  // const ingredientFilterTwo = selectedIngredientId.length === 0 ? ingredients : drinkIngredients.filter(
+  //   (ingredient) => {
+  //     console.log("INGREDIENT",ingredient)
+  //     return true
+  //   }
+  // )
 
   //lists out all the ingredients as clickable buttons
   const ingredientsList = ingredientFilter.map(ingredient => {
@@ -213,3 +234,5 @@ export default () => {
 // 1 axios request => path in backend db query that finds all drinks that match the ingredient
 // another db query to match drink ids
 //axios request to get all the drinks that match all the id in the drink ingredients array
+
+
