@@ -10,6 +10,7 @@ class DrinksController < ApplicationController
 
   def show
    @drink = Drink.find(params[:id])
+   render json: @drink
    respond_to do |format|
     format.html # Render the HTML template
     format.json { render 'show.json.jbuilder' } # Render the JSON template

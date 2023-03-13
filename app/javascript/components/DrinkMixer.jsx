@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useSyncExternalStore } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -20,15 +20,11 @@ export default () => {
     });
   }, []);
 
-
   //When I select an ingredient...its ID stored here
   const [selectedIngredientId, setSelectedIngredientId] = useState([]);
-  //filter through drink_ingredients
 
   //a list of drinks with the ingredient selected and a list of all the ingredients from those drinks will show at drink_ingredients/${id}.json
   const [drinkIngredients, setDrinkIngredients] = useState([]);
-  const [ingredientHistory, setIngredientHistory] = useState([])
-
 
   useEffect(() => {
     if (selectedIngredientId) {
@@ -41,6 +37,87 @@ export default () => {
       })
     }
   }, [selectedIngredientId]);
+
+
+  //Click ingredient and sets the id ^^^^^
+
+  function handleIngredientSelect(id) {
+    setSelectedIngredientId((prev) => {
+      const index = prev.indexOf(id);
+      if (index === -1) {
+        // adds the ingredient ID to the selected list if not already there
+        return [...prev, id];
+      } else {
+        // removes the ingredient ID from the selected list if already there
+        prev.splice(index, 1);
+        return [...prev]; // returns a new array and re-render
+      }
+    });
+  }
+  console.log("SELECTED INGREDIENT ID", selectedIngredientId)
+  console.log("DRINK INGREDIENTS", drinkIngredients)
+
+
+  //filter return drinks that have the selected ingredients
+  // const filteredUserSelection = drinks.filter(x => x.ingredients.find((i) => selectedIngredientId.includes(i)));
+  //compares the id of the drink.
+  const filteredUserSelection = drinks.filter(drink => drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id)));
+  console.log('FILTER USER SELECTION', filteredUserSelection)
+
+
+  //if a selection is not made yet. show all the ingredients. otherwise filter the ingredients. and only return the ingredient. drinks that are created
+  //if gin is selected previously and every other ingredients only shows related ingredients related to gin (drink)
+  const ingredientFilter = selectedIngredientId.length === 0 ? ingredients : ingredients.filter((ingredient) => drinkIngredients.find((i) => i.available_ingredient_list.includes(ingredient.id)));
+  console.log('INGREDIENT FILTER', ingredientFilter)
+
+
+
+
+  //lists out all the ingredients as clickable buttons
+  const ingredientsList = ingredientFilter.map(ingredient => {
+    return (
+      <button key={ingredient.id} onClick={() => handleIngredientSelect(ingredient.id)}>
+        {ingredient.name}
+      </button>
+    )
+  });
+
+  //lists out the selected ingredients as clickable buttons
+  const selectedIngredientsList = selectedIngredientId.map((ingredientId) => {
+    const ingredient = ingredients.find((i) => i.id === ingredientId);
+    return (
+      <button key={ingredientId} onClick={() => handleIngredientSelect(ingredientId)}>
+        {ingredient.name}
+      </button>
+    );
+  });
+
+  //lists out drinks available from the selected ingredients
+  const availableDrinksList = filteredUserSelection.map((drink) => {
+    return (
+      <li key={drink.id}>
+        {drink.name}
+      </li>
+    );
+  });
+
+  return (
+    <div>
+
+      <h2>Ingredients</h2>
+      {ingredientsList}
+
+      <h2>Selected Ingredients</h2>
+      {selectedIngredientsList}
+
+      <h2>Available Drinks</h2>
+      <ul>
+        {availableDrinksList}
+      </ul>
+
+    </div>
+  );
+}
 
 
   //import helper function for filter.
@@ -74,98 +151,7 @@ export default () => {
   //trace available ingredient list.
   //available ingredient list
 
-  //Click ingredient and sets the id ^^^^^
-  function handleIngredientSelect(id) {
-    {
-      setSelectedIngredientId((prev) => {
-        let index = selectedIngredientId.indexOf(id)
-        if (index === -1) {
-          return [...prev, id]
-        } else {
-          prev.splice(index, 1)
-          return prev
-        }
-      });
-      
-    }
-  }
-console.log("SELECTED INGREDIENT ID", selectedIngredientId)
 
-
-  //filter return drinks that have the selected ingredients
-  // const filteredUserSelection = drinks.filter(x => x.ingredients.find((i) => selectedIngredientId.includes(i)));
-  const filteredUserSelection = drinks.filter(drink => drinkIngredients.find((i) => i.drink_ingredient.find((j) => j.id === drink.id)));
-  //compares the id of the drink.
-  console.log('FILTER USER SELECTION', filteredUserSelection)
-
-  const ingredientFilter = selectedIngredientId.length === 0 ? ingredients : ingredients.filter((ingredient) => drinkIngredients.find((i) => i.available_ingredient_list.includes(ingredient.id)));
-  console.log('INGREDIENT FILTER', ingredientFilter)
-  //if a selection is not made yet. show all the ingredients. otherwise filter the ingredients. and only return the ingredient. drinks that are created
-  //if gin is selected previously and every other ingredients only shows related ingredients related to gin (drink)
-
-  //lists out all the ingredients as clickable buttons
-  const ingredientsList = ingredientFilter.map(ingredient => {
-    return (
-      <button key={ingredient.id} onClick={() => handleIngredientSelect(ingredient.id)}>
-        {ingredient.name}
-      </button>
-    )
-  });
-
-  // const drinkIngredientList = drinkIngredients.drink_ingredient.map(drinkIngredient => {
-  //   return (
-  //     <li>
-  //       {drinkIngredients.drink_ingredient.id}
-  //     </li>
-  //   )
-  // })
-
-  return (
-    <div>
-      <h2>Ingredients</h2>
-      {ingredientsList}
-
-      {/* <h2>Available Drinks</h2>
-      <ul>
-        {array_of_drinks}
-      </ul>
-      <h2>Available Ingredients</h2>
-      <ul>
-        {array_of_selections}
-      </ul>
-      <h2>What you already selected</h2>
-      <ul>
-        {selectedIngredientId}
-      </ul> */}
-    </div>
-  );
-
-}
-
-// export default () => (
-//     <div>
-//         <div className="mixer-1">
-
-//             <div className="mixer-2">
-//                 <h1>TEST</h1>
-//             </div>
-
-//             <div className="mixer-3">
-//                 <div>
-//                     <h1>TEST</h1>
-//                 </div>
-//                 <div>
-//                     <h1>TEST</h1>
-//                 </div>
-
-//                 <div>
-//                     <h1>TEST</h1>
-//                 </div>
-//             </div>
-
-//         </div>
-//     </div>
-// );
 
 // export default () => {
 // 	const [ingredients, setIngredients] = useState([]);
